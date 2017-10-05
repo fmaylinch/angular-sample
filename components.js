@@ -1,7 +1,7 @@
 
 myApp.component('bookListPage', {
 
-  controller: function(bookService) {
+  controller: function(bookService, $location) {
 
     console.log("getting books");
     bookService.getBooks().then(books => {
@@ -12,12 +12,20 @@ myApp.component('bookListPage', {
     }, function(response) {
       console.error(response);
     });
+
+    this.goToBookPage = function(book) {
+      // $location lets us change to one of the paths in $routeProvider
+      $location.path("/books/" + book.id);
+    };
   },
 
   template: `
     <div class="list">
       <!-- ng-repeat repeats the HTML element for each item in the array -->
-      <book-detail ng-repeat="b in $ctrl.books" book="b" />
+      <div ng-repeat="b in $ctrl.books">
+        <book-detail book="b" ng-click="$ctrl.goToBookPage(b)" />
+      </div>
+
     </div>
   `
 });
