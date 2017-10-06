@@ -5,12 +5,8 @@ myApp.component('bookListPage', {
 
     console.log("getting books");
     bookService.getBooks().then(books => {
-
       console.log("books received");
       this.books = books;
-
-    }, function(response) {
-      console.error(response);
     });
 
     this.goToBookPage = function(book) {
@@ -25,7 +21,6 @@ myApp.component('bookListPage', {
       <div ng-repeat="b in $ctrl.books">
         <book-detail book="b" ng-click="$ctrl.goToBookPage(b)" />
       </div>
-
     </div>
   `
 });
