@@ -3,9 +3,12 @@ myApp.component('bookListPage', {
 
   controller: function(bookService, $location) {
 
-    console.log("getting books");
-    bookService.getBooks().then(books => {
-      console.log("books received");
+    // open the console and check the order of these logs
+    console.log("calling getBooks()");
+    const booksPromise = bookService.getBooks();
+    console.log("received promise of books");
+    booksPromise.then(books => {
+      console.log("books received from promise of books");
       this.books = books;
     });
 
